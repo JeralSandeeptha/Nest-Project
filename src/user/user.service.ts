@@ -8,11 +8,13 @@ import { UpdateUserDTO } from './dto/request/UpdateUserDTO';
 export class UserService {
   users: User[] = [];
 
-  getAllUsers(): User[] {
+  // eslint-disable-next-line @typescript-eslint/require-await
+  async getAllUsers(): Promise<User[]> {
     return this.users;
   }
 
-  createUser(data: CreateUserDTO): User {
+  // eslint-disable-next-line @typescript-eslint/require-await
+  async createUser(data: CreateUserDTO): Promise<User> {
     const createdDate = new Date();
     const newUser = {
       _id: uuidv4(),
@@ -25,7 +27,8 @@ export class UserService {
     return newUser;
   }
 
-  getUser(id: string): User | string {
+  // eslint-disable-next-line @typescript-eslint/require-await
+  async getUser(id: string): Promise<User | string> {
     const user = this.users.find((user) => {
       return user._id === id;
     });
@@ -33,7 +36,8 @@ export class UserService {
     return user;
   }
 
-  deleteUser(id: string): string {
+  // eslint-disable-next-line @typescript-eslint/require-await
+  async deleteUser(id: string): Promise<string> {
     const user = this.users.find((user) => {
       return user._id === id;
     });
@@ -47,7 +51,8 @@ export class UserService {
     return `${user.name} User deleted successfully`;
   }
 
-  updateUser(id: string, reqBody: UpdateUserDTO): string {
+  // eslint-disable-next-line @typescript-eslint/require-await
+  async updateUser(id: string, reqBody: UpdateUserDTO): Promise<string> {
     const user = this.users.find((user) => {
       return user._id === id;
     });
