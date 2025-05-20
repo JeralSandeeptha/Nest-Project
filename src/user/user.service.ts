@@ -8,23 +8,25 @@ import { UpdateUserDTO } from './dto/request/UpdateUserDTO';
 export class UserService {
   users: User[] = [];
 
-  // eslint-disable-next-line @typescript-eslint/require-await
   async getAllUsers(): Promise<User[]> {
-    return this.users;
+    return new Promise((resolve) => {
+      resolve(this.users);
+    });
   }
 
-  // eslint-disable-next-line @typescript-eslint/require-await
   async createUser(data: CreateUserDTO): Promise<User> {
-    const createdDate = new Date();
-    const newUser = {
-      _id: uuidv4(),
-      name: data.name,
-      age: data.age,
-      createdAt: createdDate,
-      updatedAt: createdDate,
-    };
-    this.users.push(newUser);
-    return newUser;
+    return new Promise((resolve) => {
+      const createdDate = new Date();
+      const newUser = {
+        _id: uuidv4(),
+        name: data.name,
+        age: data.age,
+        createdAt: createdDate,
+        updatedAt: createdDate,
+      };
+      this.users.push(newUser);
+      resolve(newUser);
+    });
   }
 
   // eslint-disable-next-line @typescript-eslint/require-await
