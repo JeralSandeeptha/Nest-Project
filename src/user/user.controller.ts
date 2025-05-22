@@ -7,6 +7,8 @@ import {
   Param,
   Post,
   Put,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { User } from './types/types';
 import { UserService } from './user.service';
@@ -24,6 +26,7 @@ export class UserController {
   }
 
   @Post()
+  @UsePipes(ValidationPipe)
   @HttpCode(201)
   async createNewUser(@Body() reqBody: CreateUserDTO): Promise<User> {
     return await this.userService.createUser(reqBody);
